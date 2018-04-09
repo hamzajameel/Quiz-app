@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+</head>
+
+<body  >
+    <div style="font-weight: bold" id="quiz-time-left"  class="text-light bg-dark"></div>
+    <script type="text/javascript">
+        // var max_time = <? php echo $row_2['num_timer'] ?>;
+        var c_seconds = 0;
+        var total_seconds = 60 * 5;
+        max_time = parseInt(total_seconds / 60);
+        c_seconds = parseInt(total_seconds % 60);
+        document.getElementById("quiz-time-left").innerHTML = 'Time Left: ' + max_time + ' minutes ' + c_seconds + ' seconds';
+        function init() {
+            document.getElementById("quiz-time-left").innerHTML = 'Time Left: ' + max_time + ' minutes ' + c_seconds + ' seconds';
+            setTimeout("CheckTime()", 999);
+        }
+        function CheckTime() {
+            document.getElementById("quiz-time-left").innerHTML = 'Time Left: ' + max_time + ' minutes ' + c_seconds + ' seconds';
+            if (total_seconds <= 0) {
+                setTimeout('document.quiz.submit()', 1);
+
+            } else {
+                total_seconds = total_seconds - 1;
+                max_time = parseInt(total_seconds / 60);
+                c_seconds = parseInt(total_seconds % 60);
+                setTimeout("CheckTime()", 999);
+            }
+
+        }
+        init();
+    </script>
+
+
+
+    <div id="quizcontainer" class="text-secondary">
+        <h2 id="timer"  ></h2>
+        <h2 id="question" ></h2>
+        <label   class="d-block p-2 bg-dark text-white">
+            <input id="input1" type="radio" value="1" name="option">
+            <span id="option1"></span>
+        </label >
+        <br>
+        <label  class="d-block p-2 bg-dark text-white">
+            <input type="radio" value="2" name="option">
+            <span id="option2"></span>
+        </label>
+        <br>
+        <label  class="d-block p-2 bg-dark text-white">
+            <input type="radio" value="3" name="option">
+            <span id="option3"></span>
+        </label >
+        <br>
+        <label  class="d-block p-2 bg-dark text-white">
+            <input type="radio" value="4" name="option">
+            <span id="option4"></span>
+        </label>
+        <br>
+        <button onclick="next()" type="button" class="btn btn-secondary" >Next Question</button>
+    </div>
+
+
+    <div id="resultcontainer" style="display:none">
+        <h1 id="score"></h1>
+    </div>
+
+
+
+
+    <script src="quiz.js"></script>
+
+</body>
+
+
+</html>
